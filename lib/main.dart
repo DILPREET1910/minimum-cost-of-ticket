@@ -1,15 +1,18 @@
 class Node {
   late int dayOfTravel;
   late int amount;
+  late String path;
+
   Node? dayPassNode;
   Node? sevenDayPassNode;
   Node? thirtyDayPassNode;
 }
 
-Node createNode(int dayOfTravel, int amount) {
+Node createNode(int dayOfTravel, int amount, String path) {
   Node newNode = Node();
   newNode.dayOfTravel = dayOfTravel;
   newNode.amount = amount;
+  newNode.path = path;
   return newNode;
 }
 
@@ -20,13 +23,16 @@ Node addOneDayPassNode(
   int currentOneDayIndex = indexOnOneDayTravel(days, currentDayIndex);
 
   if (currentOneDayIndex == -1) {
-    Node temp = createNode(367, root.amount + costs[0]);
+    Node temp = createNode(367, root.amount + costs[0],
+        "${root.path}\nOne Day pass at day ${days[currentDayIndex]}");
     endNodes.add(temp);
     return temp;
   }
 
-  root.dayPassNode = createNode(days[currentOneDayIndex], 0);
+  root.dayPassNode = createNode(days[currentOneDayIndex], 0, "");
   root.dayPassNode!.amount = root.amount + costs[0];
+  root.dayPassNode!.path =
+      "${root.path}\nOne Day pass at day ${days[currentDayIndex]}";
   Node newNode = root.dayPassNode!;
   newNode.dayPassNode =
       addOneDayPassNode(days, costs, currentOneDayIndex, newNode);
@@ -42,13 +48,16 @@ Node addSevenDayPassNode(
   int currentSevenDayIndex = indexOnSevenDayTravel(days, currentDayIndex);
 
   if (currentSevenDayIndex == -1) {
-    Node temp = createNode(367, root.amount + costs[1]);
+    Node temp = createNode(367, root.amount + costs[1],
+        "${root.path}\nSeven Day pass at day ${days[currentDayIndex]}");
     endNodes.add(temp);
     return temp;
   }
 
-  root.sevenDayPassNode = createNode(days[currentSevenDayIndex], 0);
+  root.sevenDayPassNode = createNode(days[currentSevenDayIndex], 0, "");
   root.sevenDayPassNode!.amount = root.amount + costs[1];
+  root.sevenDayPassNode!.path =
+      "${root.path}\nSeven Day pass at day ${days[currentDayIndex]}";
   Node newNode = root.sevenDayPassNode!;
   newNode.dayPassNode =
       addOneDayPassNode(days, costs, currentSevenDayIndex, newNode);
@@ -64,13 +73,16 @@ Node addThirtyDayPassNode(
   int currentThirtyDayIndex = indexOnThirtyDayTravel(days, currentDayIndex);
 
   if (currentThirtyDayIndex == -1) {
-    Node temp = createNode(367, root.amount + costs[2]);
+    Node temp = createNode(367, root.amount + costs[2],
+        "${root.path}\nThirty Day pass at day ${days[currentDayIndex]}");
     endNodes.add(temp);
     return temp;
   }
 
-  root.thirtyDayPassNode = createNode(days[currentThirtyDayIndex], 0);
+  root.thirtyDayPassNode = createNode(days[currentThirtyDayIndex], 0, "");
   root.thirtyDayPassNode!.amount = root.amount + costs[2];
+  root.thirtyDayPassNode!.path =
+      "${root.path}\nThirty Day pass at day ${days[currentDayIndex]}";
   Node newNode = root.thirtyDayPassNode!;
   newNode.dayPassNode =
       addOneDayPassNode(days, costs, currentThirtyDayIndex, newNode);
@@ -110,7 +122,7 @@ int indexOnThirtyDayTravel(List<int> days, int currentDayIndex) {
 }
 
 void minCostTickets(List<int> days, List<int> costs) {
-  Node root = createNode(days[0], 0);
+  Node root = createNode(days[0], 0, "");
   root.dayPassNode = addOneDayPassNode(days, costs, 0, root);
   root.sevenDayPassNode = addSevenDayPassNode(days, costs, 0, root);
   root.thirtyDayPassNode = addThirtyDayPassNode(days, costs, 0, root);
@@ -146,6 +158,10 @@ void minCostTickets(List<int> days, List<int> costs) {
 
   print(minPath);
   print(minPath[0].amount);
+  print(minPath[0].path);
+  print("");
+  print(minPath[1].amount);
+  print(minPath[1].path);
 }
 
 void main() {
