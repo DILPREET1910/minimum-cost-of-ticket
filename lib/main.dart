@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class Node {
   late int dayOfTravel;
   late int amount;
@@ -24,6 +22,7 @@ Node? addOneDayPassNode(
   }
 
   root.dayPassNode = createNode(days[currentOneDayIndex]);
+  root.dayPassNode!.amount = root.amount + costs[0];
   Node newNode = root.dayPassNode!;
   newNode.dayPassNode =
       addOneDayPassNode(days, costs, currentOneDayIndex, newNode);
@@ -43,6 +42,7 @@ Node? addSevenDayPassNode(
   }
 
   root.sevenDayPassNode = createNode(days[currentSevenDayIndex]);
+  root.sevenDayPassNode!.amount = root.amount + costs[1];
   Node newNode = root.sevenDayPassNode!;
   newNode.dayPassNode =
       addOneDayPassNode(days, costs, currentSevenDayIndex, newNode);
@@ -62,6 +62,7 @@ Node? addThirtyDayPassNode(
   }
 
   root.thirtyDayPassNode = createNode(days[currentThirtyDayIndex]);
+  root.thirtyDayPassNode!.amount = root.amount + costs[2];
   Node newNode = root.thirtyDayPassNode!;
   newNode.dayPassNode =
       addOneDayPassNode(days, costs, currentThirtyDayIndex, newNode);
@@ -70,31 +71,6 @@ Node? addThirtyDayPassNode(
   newNode.thirtyDayPassNode =
       addThirtyDayPassNode(days, costs, currentThirtyDayIndex, newNode);
   return newNode;
-}
-
-void minCostTickets(List<int> days, List<int> costs) {
-  Node root = createNode(days[0]);
-  root.dayPassNode = addOneDayPassNode(days, costs, 0, root);
-  root.sevenDayPassNode = addSevenDayPassNode(days, costs, 0, root);
-  root.thirtyDayPassNode = addThirtyDayPassNode(days, costs, 0, root);
-
-  print(root.dayOfTravel);
-  print("");
-  print(root.dayPassNode!.dayOfTravel);
-  print(root.sevenDayPassNode!.dayOfTravel);
-  print(root.thirtyDayPassNode!.dayOfTravel);
-  print("");
-  print(root.dayPassNode!.dayPassNode!.dayOfTravel);
-  print(root.dayPassNode!.sevenDayPassNode!.dayOfTravel);
-  print(root.dayPassNode!.thirtyDayPassNode!.dayOfTravel);
-  print("");
-  print(root.sevenDayPassNode!.dayPassNode!.dayOfTravel);
-  print(root.sevenDayPassNode!.sevenDayPassNode!.dayOfTravel);
-  print(root.sevenDayPassNode!.thirtyDayPassNode!.dayOfTravel);
-  print("");
-  print(root.thirtyDayPassNode!.dayPassNode!.dayOfTravel);
-  print(root.thirtyDayPassNode!.sevenDayPassNode!.dayOfTravel);
-  print(root.thirtyDayPassNode!.thirtyDayPassNode!.dayOfTravel);
 }
 
 // Get next day of travel we need to buy ticket on
@@ -123,6 +99,30 @@ int indexOnThirtyDayTravel(List<int> days, int currentDayIndex) {
   while (true) {
     if (days[currentDayIndex++] >= newDay) return currentDayIndex - 1;
   }
+}
+
+void minCostTickets(List<int> days, List<int> costs) {
+  Node root = createNode(days[0]);
+  root.dayPassNode = addOneDayPassNode(days, costs, 0, root);
+  root.sevenDayPassNode = addSevenDayPassNode(days, costs, 0, root);
+  root.thirtyDayPassNode = addThirtyDayPassNode(days, costs, 0, root);
+
+  print(root.dayOfTravel);
+  print("");
+  print(root.dayPassNode!.dayOfTravel);
+  print(root.sevenDayPassNode!.dayOfTravel);
+  print(root.thirtyDayPassNode!.dayOfTravel);
+  print("");
+  print(root.dayPassNode!.dayPassNode!.dayOfTravel);
+  print(root.dayPassNode!.sevenDayPassNode!.dayOfTravel);
+  print(root.dayPassNode!.thirtyDayPassNode!.dayOfTravel);
+  print("");
+  print(root.sevenDayPassNode!.dayPassNode!.dayOfTravel);
+  print(root.sevenDayPassNode!.sevenDayPassNode!.dayOfTravel);
+  print(root.sevenDayPassNode!.thirtyDayPassNode!.dayOfTravel);
+  print("");
+  print(root.thirtyDayPassNode!.dayPassNode!.dayPassNode!.dayOfTravel);
+  print(root.thirtyDayPassNode!.dayPassNode!.dayPassNode!.amount);
 }
 
 void main() {
