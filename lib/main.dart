@@ -13,12 +13,16 @@ Node createNode(int dayOfTravel, int amount) {
   return newNode;
 }
 
+List<Node> endNodes = [];
+
 Node addOneDayPassNode(
     List<int> days, List<int> costs, int currentDayIndex, Node root) {
   int currentOneDayIndex = indexOnOneDayTravel(days, currentDayIndex);
 
   if (currentOneDayIndex == -1) {
-    return createNode(367, root.amount + costs[0]);
+    Node temp = createNode(367, root.amount + costs[0]);
+    endNodes.add(temp);
+    return temp;
   }
 
   root.dayPassNode = createNode(days[currentOneDayIndex], 0);
@@ -38,7 +42,9 @@ Node addSevenDayPassNode(
   int currentSevenDayIndex = indexOnSevenDayTravel(days, currentDayIndex);
 
   if (currentSevenDayIndex == -1) {
-    return createNode(367, root.amount + costs[1]);
+    Node temp = createNode(367, root.amount + costs[1]);
+    endNodes.add(temp);
+    return temp;
   }
 
   root.sevenDayPassNode = createNode(days[currentSevenDayIndex], 0);
@@ -58,7 +64,9 @@ Node addThirtyDayPassNode(
   int currentThirtyDayIndex = indexOnThirtyDayTravel(days, currentDayIndex);
 
   if (currentThirtyDayIndex == -1) {
-    return createNode(367, root.amount + costs[2]);
+    Node temp = createNode(367, root.amount + costs[2]);
+    endNodes.add(temp);
+    return temp;
   }
 
   root.thirtyDayPassNode = createNode(days[currentThirtyDayIndex], 0);
@@ -123,10 +131,25 @@ void minCostTickets(List<int> days, List<int> costs) {
   print("");
   print(root.sevenDayPassNode!.dayPassNode!.thirtyDayPassNode!.dayOfTravel);
   print(root.sevenDayPassNode!.dayPassNode!.thirtyDayPassNode!.amount);
+
+  int minCost = 9223372036854775807;
+  List<Node> minPath = [];
+  endNodes.forEach((node) {
+    if (node.amount < minCost) {
+      minCost = node.amount;
+      minPath.clear();
+      minPath.add(node);
+    } else if (node.amount == minCost) {
+      minPath.add(node);
+    }
+  });
+
+  print(minPath);
+  print(minPath[0].amount);
 }
 
 void main() {
-  List<int> days = [2, 7, 9, 11, 17, 23, 28, 31, 40, 221];
+  List<int> days = [1, 4, 6, 7, 8, 20];
   List<int> costs = [2, 7, 15];
   minCostTickets(days, costs);
 }
