@@ -31,8 +31,8 @@ class _WidgetsDatePickerState extends State<WidgetsDatePicker> {
       showNavigationArrow: true,
       onSubmit: (value) {
         global.selectedDates = selectedDates.selectedDates!;
-        global.listDayOfYear = dayOfYear.getListDayOfYear(global.selectedDates);
-        print(global.listDayOfYear);
+        global.days = dayOfYear.getListDayOfYear(global.selectedDates);
+        print(global.days);
       },
       onCancel: () {
         selectedDates.selectedDates = [];
