@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 // lib imports
-import 'package:ads_course_project_minimum_cost_of_ticket/services/globalVariables.dart' as global;
-import 'package:ads_course_project_minimum_cost_of_ticket/services/dayOfYear.dart';
+import 'package:ads_course_project_minimum_cost_of_ticket/widgets/datepicker.dart';
 
 // syncfusion date picker imports
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -21,34 +20,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // instance day of year
-  DayOfYear dayOfYear = DayOfYear();
-
-  // date picker controller
-  DateRangePickerController selectedDates = DateRangePickerController();
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: Column(
           children: [
-            SfDateRangePicker(
-              controller: selectedDates,
-              view: DateRangePickerView.month,
-              selectionMode: DateRangePickerSelectionMode.multiple,
-              showActionButtons: true,
-              showNavigationArrow: true,
-              onSubmit: (value) {
-                global.selectedDates = selectedDates.selectedDates!;
-                global.listDayOfYear = dayOfYear.getListDayOfYear(global.selectedDates);
-                print(global.listDayOfYear);
-              },
-              onCancel: () {
-                selectedDates.selectedDates = [];
-                print(selectedDates.selectedDates);
-              },
-            ),
+            WidgetsDatePicker(),
             const Card(
               child: Text("daily weekly monthly here"),
             ),
