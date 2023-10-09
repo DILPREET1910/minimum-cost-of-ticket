@@ -1,171 +1,54 @@
-class Node {
-  late int dayOfTravel;
-  late int amount;
-  late String path;
+import 'package:flutter/material.dart';
 
-  Node? dayPassNode;
-  Node? sevenDayPassNode;
-  Node? thirtyDayPassNode;
-}
+// lib imports
+import 'package:ads_course_project_minimum_cost_of_ticket/services/globalVariables.dart' as global;
 
-Node createNode(int dayOfTravel, int amount, String path) {
-  Node newNode = Node();
-  newNode.dayOfTravel = dayOfTravel;
-  newNode.amount = amount;
-  newNode.path = path;
-  return newNode;
-}
-
-List<Node> endNodes = [];
-
-Node addOneDayPassNode(
-    List<int> days, List<int> costs, int currentDayIndex, Node root) {
-  int currentOneDayIndex = indexOnOneDayTravel(days, currentDayIndex);
-
-  if (currentOneDayIndex == -1) {
-    Node temp = createNode(367, root.amount + costs[0],
-        "${root.path}\nOne Day pass at day ${days[currentDayIndex]}");
-    endNodes.add(temp);
-    return temp;
-  }
-
-  root.dayPassNode = createNode(days[currentOneDayIndex], 0, "");
-  root.dayPassNode!.amount = root.amount + costs[0];
-  root.dayPassNode!.path =
-      "${root.path}\nOne Day pass at day ${days[currentDayIndex]}";
-  Node newNode = root.dayPassNode!;
-  newNode.dayPassNode =
-      addOneDayPassNode(days, costs, currentOneDayIndex, newNode);
-  newNode.sevenDayPassNode =
-      addSevenDayPassNode(days, costs, currentOneDayIndex, newNode);
-  newNode.thirtyDayPassNode =
-      addThirtyDayPassNode(days, costs, currentOneDayIndex, newNode);
-  return newNode;
-}
-
-Node addSevenDayPassNode(
-    List<int> days, List<int> costs, int currentDayIndex, Node root) {
-  int currentSevenDayIndex = indexOnSevenDayTravel(days, currentDayIndex);
-
-  if (currentSevenDayIndex == -1) {
-    Node temp = createNode(367, root.amount + costs[1],
-        "${root.path}\nSeven Day pass at day ${days[currentDayIndex]}");
-    endNodes.add(temp);
-    return temp;
-  }
-
-  root.sevenDayPassNode = createNode(days[currentSevenDayIndex], 0, "");
-  root.sevenDayPassNode!.amount = root.amount + costs[1];
-  root.sevenDayPassNode!.path =
-      "${root.path}\nSeven Day pass at day ${days[currentDayIndex]}";
-  Node newNode = root.sevenDayPassNode!;
-  newNode.dayPassNode =
-      addOneDayPassNode(days, costs, currentSevenDayIndex, newNode);
-  newNode.sevenDayPassNode =
-      addSevenDayPassNode(days, costs, currentSevenDayIndex, newNode);
-  newNode.thirtyDayPassNode =
-      addThirtyDayPassNode(days, costs, currentSevenDayIndex, newNode);
-  return newNode;
-}
-
-Node addThirtyDayPassNode(
-    List<int> days, List<int> costs, int currentDayIndex, Node root) {
-  int currentThirtyDayIndex = indexOnThirtyDayTravel(days, currentDayIndex);
-
-  if (currentThirtyDayIndex == -1) {
-    Node temp = createNode(367, root.amount + costs[2],
-        "${root.path}\nThirty Day pass at day ${days[currentDayIndex]}");
-    endNodes.add(temp);
-    return temp;
-  }
-
-  root.thirtyDayPassNode = createNode(days[currentThirtyDayIndex], 0, "");
-  root.thirtyDayPassNode!.amount = root.amount + costs[2];
-  root.thirtyDayPassNode!.path =
-      "${root.path}\nThirty Day pass at day ${days[currentDayIndex]}";
-  Node newNode = root.thirtyDayPassNode!;
-  newNode.dayPassNode =
-      addOneDayPassNode(days, costs, currentThirtyDayIndex, newNode);
-  newNode.sevenDayPassNode =
-      addSevenDayPassNode(days, costs, currentThirtyDayIndex, newNode);
-  newNode.thirtyDayPassNode =
-      addThirtyDayPassNode(days, costs, currentThirtyDayIndex, newNode);
-  return newNode;
-}
-
-// Get next day of travel we need to buy ticket on
-int indexOnOneDayTravel(List<int> days, int currentDayIndex) {
-  int lastDay = days.last;
-  int newDay = days[currentDayIndex] + 1;
-  if (newDay >= lastDay) return -1;
-  while (true) {
-    if (days[currentDayIndex++] >= newDay) return currentDayIndex - 1;
-  }
-}
-
-int indexOnSevenDayTravel(List<int> days, int currentDayIndex) {
-  int lastDay = days.last;
-  int newDay = days[currentDayIndex] + 7;
-  if (newDay >= lastDay) return -1;
-  while (true) {
-    if (days[currentDayIndex++] >= newDay) return currentDayIndex - 1;
-  }
-}
-
-int indexOnThirtyDayTravel(List<int> days, int currentDayIndex) {
-  int lastDay = days.last;
-  int newDay = days[currentDayIndex] + 30;
-  if (newDay >= lastDay) return -1;
-  while (true) {
-    if (days[currentDayIndex++] >= newDay) return currentDayIndex - 1;
-  }
-}
-
-void minCostTickets(List<int> days, List<int> costs) {
-  Node root = createNode(days[0], 0, "");
-  root.dayPassNode = addOneDayPassNode(days, costs, 0, root);
-  root.sevenDayPassNode = addSevenDayPassNode(days, costs, 0, root);
-  root.thirtyDayPassNode = addThirtyDayPassNode(days, costs, 0, root);
-
-  print(root.dayOfTravel);
-  print("");
-  print(root.dayPassNode!.dayOfTravel);
-  print(root.sevenDayPassNode!.dayOfTravel);
-  print(root.thirtyDayPassNode!.dayOfTravel);
-  print("");
-  print(root.dayPassNode!.dayPassNode!.dayOfTravel);
-  print(root.dayPassNode!.sevenDayPassNode!.dayOfTravel);
-  print(root.dayPassNode!.thirtyDayPassNode!.dayOfTravel);
-  print("");
-  print(root.sevenDayPassNode!.dayPassNode!.dayOfTravel);
-  print(root.sevenDayPassNode!.sevenDayPassNode!.dayOfTravel);
-  print(root.sevenDayPassNode!.thirtyDayPassNode!.dayOfTravel);
-  print("");
-  print(root.sevenDayPassNode!.dayPassNode!.thirtyDayPassNode!.dayOfTravel);
-  print(root.sevenDayPassNode!.dayPassNode!.thirtyDayPassNode!.amount);
-
-  int minCost = 9223372036854775807;
-  List<Node> minPath = [];
-  endNodes.forEach((node) {
-    if (node.amount < minCost) {
-      minCost = node.amount;
-      minPath.clear();
-      minPath.add(node);
-    } else if (node.amount == minCost) {
-      minPath.add(node);
-    }
-  });
-
-  print(minPath);
-  print(minPath[0].amount);
-  print(minPath[0].path);
-  print("");
-  print(minPath[1].amount);
-  print(minPath[1].path);
-}
+// syncfusion date picker imports
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 void main() {
-  List<int> days = [1, 4, 6, 7, 8, 20];
-  List<int> costs = [2, 7, 15];
-  minCostTickets(days, costs);
+  runApp(const MaterialApp(
+    home: Home(),
+  ));
+}
+
+class Home extends StatefulWidget {
+  const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  // date picker controller
+  DateRangePickerController selectedDates = DateRangePickerController();
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            SfDateRangePicker(
+              controller: selectedDates,
+              view: DateRangePickerView.month,
+              selectionMode: DateRangePickerSelectionMode.multiple,
+              showActionButtons: true,
+              showNavigationArrow: true,
+              onSubmit: (value) {
+                print(selectedDates.selectedDates);
+              },
+              onCancel: () {
+                selectedDates.selectedDates = [];
+                print(selectedDates.selectedDates);
+              },
+            ),
+            const Card(
+              child: Text("daily weekly monthly here"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
