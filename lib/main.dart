@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 // lib imports
 import 'package:ads_course_project_minimum_cost_of_ticket/services/globalVariables.dart' as global;
+import 'package:ads_course_project_minimum_cost_of_ticket/services/dayOfYear.dart';
 
 // syncfusion date picker imports
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -20,6 +21,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  // instance day of year
+  DayOfYear dayOfYear = DayOfYear();
+
   // date picker controller
   DateRangePickerController selectedDates = DateRangePickerController();
 
@@ -36,7 +40,9 @@ class _HomeState extends State<Home> {
               showActionButtons: true,
               showNavigationArrow: true,
               onSubmit: (value) {
-                print(selectedDates.selectedDates);
+                global.selectedDates = selectedDates.selectedDates!;
+                global.listDayOfYear = dayOfYear.getListDayOfYear(global.selectedDates);
+                print(global.listDayOfYear);
               },
               onCancel: () {
                 selectedDates.selectedDates = [];
