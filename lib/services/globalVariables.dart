@@ -30,6 +30,9 @@ dynamic onSubmit() {
 
 dynamic onCancel() {
   selectedDatesController.selectedDates = [];
+  daily.clear();
+  weekly.clear();
+  monthly.clear();
   days = [];
   costs = [];
   minNode = [];

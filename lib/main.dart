@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 // lib imports
+import 'package:ads_course_project_minimum_cost_of_ticket/pages/path.dart';
 import 'package:ads_course_project_minimum_cost_of_ticket/services/globalVariables.dart' as global;
 import 'package:ads_course_project_minimum_cost_of_ticket/widgets/datepicker.dart';
 import 'package:ads_course_project_minimum_cost_of_ticket/services/minimumCostOfTicket.dart';
@@ -40,9 +41,6 @@ class _HomeState extends State<Home> {
                 TextButton(
                   onPressed: () {
                     global.onCancel();
-                    global.daily.clear();
-                    global.weekly.clear();
-                    global.monthly.clear();
                     print('days: ${global.days}');
                     print('costs: ${global.costs}');
                   },
@@ -57,8 +55,9 @@ class _HomeState extends State<Home> {
                     print('days: ${global.days}');
                     print('costs: ${global.costs}');
                     minimumCost.minCostTickets(global.days, global.costs);
-                    print(global.minNode);
-                    print(global.minNode[0].path);
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                      return const Path();
+                    }));
                   },
                   child: const Text("calculate"),
                 ),
