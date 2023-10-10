@@ -25,11 +25,6 @@ class _HomeState extends State<Home> {
   // minimum cost of ticket instance
   MinimumCost minimumCost = MinimumCost();
 
-  // text form controllers
-  TextEditingController daily = TextEditingController();
-  TextEditingController weekly = TextEditingController();
-  TextEditingController monthly = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -37,19 +32,37 @@ class _HomeState extends State<Home> {
         body: Column(
           children: [
             const WidgetsDatePicker(),
-            TextFormField(controller: daily),
-            TextFormField(controller: weekly),
-            TextFormField(controller: monthly),
-            TextButton(
-              onPressed: () {
-                global.costs.add(int.parse(daily.text.toString()));
-                global.costs.add(int.parse(weekly.text.toString()));
-                global.costs.add(int.parse(monthly.text.toString()));
-                minimumCost.minCostTickets(global.days, global.costs);
-                print(global.minNode);
-                print(global.minNode[0].path);
-              },
-              child: const Text("calculate"),
+            TextFormField(controller: global.daily),
+            TextFormField(controller: global.weekly),
+            TextFormField(controller: global.monthly),
+            Row(
+              children: [
+                TextButton(
+                  onPressed: () {
+                    global.onCancel();
+                    global.daily.clear();
+                    global.weekly.clear();
+                    global.monthly.clear();
+                    print('days: ${global.days}');
+                    print('costs: ${global.costs}');
+                  },
+                  child: const Text("cancel"),
+                ),
+                TextButton(
+                  onPressed: () {
+                    global.costs.add(int.parse(global.daily.text.toString()));
+                    global.costs.add(int.parse(global.weekly.text.toString()));
+                    global.costs.add(int.parse(global.monthly.text.toString()));
+                    global.onSubmit();
+                    print('days: ${global.days}');
+                    print('costs: ${global.costs}');
+                    minimumCost.minCostTickets(global.days, global.costs);
+                    print(global.minNode);
+                    print(global.minNode[0].path);
+                  },
+                  child: const Text("calculate"),
+                ),
+              ],
             ),
           ],
         ),
