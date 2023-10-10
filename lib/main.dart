@@ -33,9 +33,21 @@ class _HomeState extends State<Home> {
         body: Column(
           children: [
             const WidgetsDatePicker(),
-            TextFormField(controller: global.daily),
-            TextFormField(controller: global.weekly),
-            TextFormField(controller: global.monthly),
+            TextFormField(
+              controller: global.daily,
+              decoration: const InputDecoration(hintText: "cost of daily pass"),
+              keyboardType: TextInputType.number,
+            ),
+            TextFormField(
+              controller: global.weekly,
+              decoration: const InputDecoration(hintText: "const of weekly pass"),
+              keyboardType: TextInputType.number,
+            ),
+            TextFormField(
+              controller: global.monthly,
+              decoration: const InputDecoration(hintText: "cost of monthly pass"),
+              keyboardType: TextInputType.number,
+            ),
             Row(
               children: [
                 TextButton(
