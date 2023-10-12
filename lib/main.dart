@@ -129,7 +129,7 @@ class _HomeState extends State<Home> {
                               print('costs: ${global.costs}');
                             },
                             child: Text(
-                              "cancel",
+                              "clear",
                               style: GoogleFonts.ubuntu(
                                 fontSize: MediaQuery.of(context).size.height / 40,
                                 fontWeight: FontWeight.w700,

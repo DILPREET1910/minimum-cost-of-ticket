@@ -79,7 +79,7 @@ class _PathState extends State<Path> {
                                     Text(
                                       global.minNode[index].path,
                                       style: GoogleFonts.ubuntu(
-                                        fontSize: MediaQuery.of(context).size.height / 45,
+                                        fontSize: MediaQuery.of(context).size.height / 50,
                                         fontWeight: FontWeight.w400,
                                         letterSpacing: 1,
                                       ),
