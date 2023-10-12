@@ -37,7 +37,7 @@ class _PathState extends State<Path> {
                   Text(
                     "Total possible paths: ${global.minNode.length}",
                     style: GoogleFonts.ubuntu(
-                      fontSize: MediaQuery.of(context).size.height / 25,
+                      fontSize: MediaQuery.of(context).size.height / 26,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -45,8 +45,8 @@ class _PathState extends State<Path> {
                   Text(
                     "Minimum Amount: ${global.minNode[0].amount}",
                     style: GoogleFonts.ubuntu(
-                      fontSize: MediaQuery.of(context).size.height / 35,
-                      fontWeight: FontWeight.w500,
+                      fontSize: MediaQuery.of(context).size.height / 30,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height / 50),
@@ -56,16 +56,45 @@ class _PathState extends State<Path> {
                       itemBuilder: (context, index) {
                         return Column(
                           children: [
-                            ListTile(
-                              tileColor: Colors.grey[200],
-                              title: Text('Path$index:\n${global.minNode[index].path}'),
+                            Card(
+                              color: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                side: const BorderSide(
+                                  width: 3,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.all(MediaQuery.of(context).size.height / 50),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      'Path ${index + 1}:',
+                                      style: GoogleFonts.ubuntu(
+                                        fontSize: MediaQuery.of(context).size.height / 35,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    Text(
+                                      global.minNode[index].path,
+                                      style: GoogleFonts.ubuntu(
+                                        fontSize: MediaQuery.of(context).size.height / 45,
+                                        fontWeight: FontWeight.w400,
+                                        letterSpacing: 1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                            const SizedBox(height: 10),
+                            SizedBox(height: MediaQuery.of(context).size.height / 90),
                           ],
                         );
                       },
                     ),
                   ),
+                  SizedBox(height: MediaQuery.of(context).size.height / 90),
                   Card(
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
