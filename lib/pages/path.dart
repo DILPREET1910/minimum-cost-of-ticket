@@ -66,14 +66,31 @@ class _PathState extends State<Path> {
                       },
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      global.onCancel();
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-                        return const Home();
-                      }));
-                    },
-                    child: const Text('Calculate more min cost'),
+                  Card(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      side: const BorderSide(
+                        width: 3,
+                        color: Colors.black,
+                      ),
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+                        global.onCancel();
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                          return const Home();
+                        }));
+                      },
+                      child: Text(
+                        'Calculate more min cost',
+                        style: GoogleFonts.ubuntu(
+                          fontSize: MediaQuery.of(context).size.height / 40,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

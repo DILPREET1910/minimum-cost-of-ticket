@@ -50,10 +50,15 @@ class _HomeState extends State<Home> {
                     const WidgetsDatePicker(),
                     // END: Date picker
                     // START: cost of passes text filed
+                    SizedBox(height: MediaQuery.of(context).size.height / 50),
                     Card(
                       color: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
+                        side: const BorderSide(
+                          width: 3,
+                          color: Colors.black,
+                        ),
                       ),
                       child: Padding(
                         padding: EdgeInsets.all(MediaQuery.of(context).size.height / 30),
@@ -104,6 +109,7 @@ class _HomeState extends State<Home> {
                     ),
                     // END: cost of passes text filed
                     // START: Cancel calculate buttons
+                    SizedBox(height: MediaQuery.of(context).size.height / 50),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [

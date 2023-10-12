@@ -20,6 +20,10 @@ class _WidgetsDatePickerState extends State<WidgetsDatePicker> {
       color: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
+        side: const BorderSide(
+          width: 3,
+          color: Colors.black,
+        ),
       ),
       child: Padding(
         padding: EdgeInsets.fromLTRB(
