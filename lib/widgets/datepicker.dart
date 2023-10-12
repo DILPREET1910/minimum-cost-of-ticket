@@ -30,7 +30,7 @@ class _WidgetsDatePickerState extends State<WidgetsDatePicker> {
         ),
         child: SfDateRangePicker(
           controller: global.selectedDatesController,
-          view: DateRangePickerView.month,
+          view: DateRangePickerView.year,
           selectionMode: DateRangePickerSelectionMode.multiple,
           showNavigationArrow: true,
           minDate: DateTime(DateTime.now().year, 1, 1),
