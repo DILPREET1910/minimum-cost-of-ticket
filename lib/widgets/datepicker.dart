@@ -26,13 +26,15 @@ class _WidgetsDatePickerState extends State<WidgetsDatePicker> {
           MediaQuery.of(context).size.width / 10,
           MediaQuery.of(context).size.height / 20,
           MediaQuery.of(context).size.width / 10,
-          0,
+          MediaQuery.of(context).size.height / 30,
         ),
         child: SfDateRangePicker(
           controller: global.selectedDatesController,
           view: DateRangePickerView.month,
           selectionMode: DateRangePickerSelectionMode.multiple,
           showNavigationArrow: true,
+          minDate: DateTime(DateTime.now().year, 1, 1),
+          maxDate: DateTime(DateTime.now().year, 12, 31),
         ),
       ),
     );
