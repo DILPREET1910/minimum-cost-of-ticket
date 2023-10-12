@@ -5,10 +5,9 @@ import 'package:ads_course_project_minimum_cost_of_ticket/pages/path.dart';
 import 'package:ads_course_project_minimum_cost_of_ticket/services/globalVariables.dart' as global;
 import 'package:ads_course_project_minimum_cost_of_ticket/widgets/datepicker.dart';
 import 'package:ads_course_project_minimum_cost_of_ticket/services/minimumCostOfTicket.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-// syncfusion date picker imports
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+// google fonts imports
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -104,34 +103,71 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     // END: cost of passes text filed
+                    // START: Cancel calculate buttons
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        TextButton(
-                          onPressed: () {
-                            global.onCancel();
-                            print('days: ${global.days}');
-                            print('costs: ${global.costs}');
-                          },
-                          child: const Text("cancel"),
+                        Card(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            side: const BorderSide(
+                              width: 3,
+                              color: Colors.black,
+                            ),
+                          ),
+                          child: TextButton(
+                            onPressed: () {
+                              global.onCancel();
+                              print('days: ${global.days}');
+                              print('costs: ${global.costs}');
+                            },
+                            child: Text(
+                              "cancel",
+                              style: GoogleFonts.ubuntu(
+                                fontSize: MediaQuery.of(context).size.height / 40,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
                         ),
-                        TextButton(
-                          onPressed: () {
-                            global.costs.add(int.parse(global.daily.text.toString()));
-                            global.costs.add(int.parse(global.weekly.text.toString()));
-                            global.costs.add(int.parse(global.monthly.text.toString()));
-                            global.onSubmit();
-                            print('days: ${global.days}');
-                            print('costs: ${global.costs}');
-                            minimumCost.minCostTickets(global.days, global.costs);
-                            Navigator.pushReplacement(context,
-                                MaterialPageRoute(builder: (context) {
-                              return const Path();
-                            }));
-                          },
-                          child: const Text("calculate"),
+                        Card(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            side: const BorderSide(
+                              width: 3,
+                              color: Colors.black,
+                            ),
+                          ),
+                          child: TextButton(
+                            onPressed: () {
+                              global.costs.add(int.parse(global.daily.text.toString()));
+                              global.costs.add(int.parse(global.weekly.text.toString()));
+                              global.costs.add(int.parse(global.monthly.text.toString()));
+                              global.onSubmit();
+                              print('days: ${global.days}');
+                              print('costs: ${global.costs}');
+                              minimumCost.minCostTickets(global.days, global.costs);
+                              Navigator.pushReplacement(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return const Path();
+                              }));
+                            },
+                            child: Text(
+                              "calculate",
+                              style: GoogleFonts.ubuntu(
+                                fontSize: MediaQuery.of(context).size.height / 40,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
+                    // END: Cancel calculate buttons
                   ],
                 ),
               ),
