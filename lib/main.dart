@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
     return SafeArea(
       child: Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.all(MediaQuery.of(context).size.height / 50),
           child: Column(
             children: [
               const WidgetsDatePicker(),
