@@ -38,6 +38,7 @@ dependencies:
   syncfusion_flutter_datepicker: ^23.1.39
   jiffy: ^6.2.1
   google_fonts: ^6.1.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
