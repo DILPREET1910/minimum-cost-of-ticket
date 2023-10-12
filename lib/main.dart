@@ -5,6 +5,7 @@ import 'package:ads_course_project_minimum_cost_of_ticket/pages/path.dart';
 import 'package:ads_course_project_minimum_cost_of_ticket/services/globalVariables.dart' as global;
 import 'package:ads_course_project_minimum_cost_of_ticket/widgets/datepicker.dart';
 import 'package:ads_course_project_minimum_cost_of_ticket/services/minimumCostOfTicket.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // syncfusion date picker imports
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -49,21 +50,60 @@ class _HomeState extends State<Home> {
                     // START: Date picker
                     const WidgetsDatePicker(),
                     // END: Date picker
-                    TextFormField(
-                      controller: global.daily,
-                      decoration: const InputDecoration(hintText: "cost of daily pass"),
-                      keyboardType: TextInputType.number,
+                    // START: cost of passes text filed
+                    Card(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(MediaQuery.of(context).size.height / 30),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Cost of different passes:",
+                              style: GoogleFonts.ubuntu(
+                                fontSize: MediaQuery.of(context).size.height / 30,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            SizedBox(
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: TextFormField(
+                                      controller: global.daily,
+                                      textAlign: TextAlign.center,
+                                      decoration: const InputDecoration(hintText: "1 day"),
+                                      keyboardType: TextInputType.number,
+                                    ),
+                                  ),
+                                  SizedBox(width: MediaQuery.of(context).size.width / 20),
+                                  Expanded(
+                                    child: TextFormField(
+                                      controller: global.weekly,
+                                      textAlign: TextAlign.center,
+                                      decoration: const InputDecoration(hintText: "7 day"),
+                                      keyboardType: TextInputType.number,
+                                    ),
+                                  ),
+                                  SizedBox(width: MediaQuery.of(context).size.width / 20),
+                                  Expanded(
+                                    child: TextFormField(
+                                      controller: global.monthly,
+                                      textAlign: TextAlign.center,
+                                      decoration: const InputDecoration(hintText: "30 day"),
+                                      keyboardType: TextInputType.number,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    TextFormField(
-                      controller: global.weekly,
-                      decoration: const InputDecoration(hintText: "const of weekly pass"),
-                      keyboardType: TextInputType.number,
-                    ),
-                    TextFormField(
-                      controller: global.monthly,
-                      decoration: const InputDecoration(hintText: "cost of monthly pass"),
-                      keyboardType: TextInputType.number,
-                    ),
+                    // END: cost of passes text filed
                     Row(
                       children: [
                         TextButton(
@@ -83,7 +123,8 @@ class _HomeState extends State<Home> {
                             print('days: ${global.days}');
                             print('costs: ${global.costs}');
                             minimumCost.minCostTickets(global.days, global.costs);
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (context) {
                               return const Path();
                             }));
                           },
