@@ -16,11 +16,25 @@ class WidgetsDatePicker extends StatefulWidget {
 class _WidgetsDatePickerState extends State<WidgetsDatePicker> {
   @override
   Widget build(BuildContext context) {
-    return SfDateRangePicker(
-      controller: global.selectedDatesController,
-      view: DateRangePickerView.month,
-      selectionMode: DateRangePickerSelectionMode.multiple,
-      showNavigationArrow: true,
+    return Card(
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(
+          MediaQuery.of(context).size.width / 10,
+          MediaQuery.of(context).size.height / 20,
+          MediaQuery.of(context).size.width / 10,
+          0,
+        ),
+        child: SfDateRangePicker(
+          controller: global.selectedDatesController,
+          view: DateRangePickerView.month,
+          selectionMode: DateRangePickerSelectionMode.multiple,
+          showNavigationArrow: true,
+        ),
+      ),
     );
   }
 }

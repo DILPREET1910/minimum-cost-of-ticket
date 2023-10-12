@@ -43,52 +43,56 @@ class _HomeState extends State<Home> {
             backgroundColor: Colors.transparent,
             body: Padding(
               padding: EdgeInsets.all(MediaQuery.of(context).size.height / 50),
-              child: Column(
-                children: [
-                  const WidgetsDatePicker(),
-                  TextFormField(
-                    controller: global.daily,
-                    decoration: const InputDecoration(hintText: "cost of daily pass"),
-                    keyboardType: TextInputType.number,
-                  ),
-                  TextFormField(
-                    controller: global.weekly,
-                    decoration: const InputDecoration(hintText: "const of weekly pass"),
-                    keyboardType: TextInputType.number,
-                  ),
-                  TextFormField(
-                    controller: global.monthly,
-                    decoration: const InputDecoration(hintText: "cost of monthly pass"),
-                    keyboardType: TextInputType.number,
-                  ),
-                  Row(
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          global.onCancel();
-                          print('days: ${global.days}');
-                          print('costs: ${global.costs}');
-                        },
-                        child: const Text("cancel"),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          global.costs.add(int.parse(global.daily.text.toString()));
-                          global.costs.add(int.parse(global.weekly.text.toString()));
-                          global.costs.add(int.parse(global.monthly.text.toString()));
-                          global.onSubmit();
-                          print('days: ${global.days}');
-                          print('costs: ${global.costs}');
-                          minimumCost.minCostTickets(global.days, global.costs);
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-                            return const Path();
-                          }));
-                        },
-                        child: const Text("calculate"),
-                      ),
-                    ],
-                  ),
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    // START: Date picker
+                    const WidgetsDatePicker(),
+                    // END: Date picker
+                    TextFormField(
+                      controller: global.daily,
+                      decoration: const InputDecoration(hintText: "cost of daily pass"),
+                      keyboardType: TextInputType.number,
+                    ),
+                    TextFormField(
+                      controller: global.weekly,
+                      decoration: const InputDecoration(hintText: "const of weekly pass"),
+                      keyboardType: TextInputType.number,
+                    ),
+                    TextFormField(
+                      controller: global.monthly,
+                      decoration: const InputDecoration(hintText: "cost of monthly pass"),
+                      keyboardType: TextInputType.number,
+                    ),
+                    Row(
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            global.onCancel();
+                            print('days: ${global.days}');
+                            print('costs: ${global.costs}');
+                          },
+                          child: const Text("cancel"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            global.costs.add(int.parse(global.daily.text.toString()));
+                            global.costs.add(int.parse(global.weekly.text.toString()));
+                            global.costs.add(int.parse(global.monthly.text.toString()));
+                            global.onSubmit();
+                            print('days: ${global.days}');
+                            print('costs: ${global.costs}');
+                            minimumCost.minCostTickets(global.days, global.costs);
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                              return const Path();
+                            }));
+                          },
+                          child: const Text("calculate"),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
