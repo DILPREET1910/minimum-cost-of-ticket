@@ -82,7 +82,7 @@ or [create a pull request](https://github.com/DILPREET1910/minimum-cost-of-ticke
 
 # Acknowledgements
 
-flutter libraries used from [pub.dev](pub.dev)\
+flutter libraries used from [pub.dev](https://pub.dev)\
 [cupertino_icons](https://pub.dev/packages/cupertino_icons)\
 [syncfusion_flutter_datepicker](https://pub.dev/packages/syncfusion_flutter_datepicker)\
 [jiffy](https://pub.dev/packages/jiffy)\
