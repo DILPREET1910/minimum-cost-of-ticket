@@ -18,7 +18,6 @@ the [leetcode problem minimum cost of ticket](https://leetcode.com/problems/mini
 ## Prerequisites
 
 - [Flutter SDK](https://docs.flutter.dev/get-started/install)
-- [Firebase](https://firebase.google.com/)
 
 ## Clone Repository
 
@@ -29,7 +28,7 @@ git clone https://github.com/DILPREET1910/minimum-cost-of-ticket
 
 ## Customisation
 
-In this Flutter project, all code related to the UI and Firebase backend is organised under
+In this Flutter project, all code related to the UI and backend is organised under
 the `lib/` directory. Each file within this directory is meticulously commented and named according
 to its specific use case. This structured approach ensures that understanding the functionality of
 each part of the codebase is straightforward.
